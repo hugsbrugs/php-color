@@ -38,3 +38,7 @@ var_dump(Color::is_hexa_color('frfrfr', false));
 ```
 composer exec phpunit
 ```
+
+## Author
+
+Hugo Maugey [visit my website ;)](https://hugo.maugey.fr)
