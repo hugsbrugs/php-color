@@ -40,4 +40,44 @@ class Color
         }
         return $is_hexa;
     }
+
+    /**
+     * Converts hexadecimal to rgb color
+     *
+     * @param string $hex Hexadecimal color 
+     * @param string prefered returned format (array : R - G - B | string : comma separated)
+     *
+     * @return string|array|false $rgb rgb color equivalent to Hexadecimal in string or array format or false if invalid hexadecimal color
+     *
+     */
+    public static function hexa_to_rgb($hex, $return = 'array')
+    {
+        $rgb = false;
+        $hex = str_replace("#", "", $hex);
+        if(Color::is_hexa_color($hex, false))
+        {
+            # Conversion
+            if(strlen($hex) == 3)
+            {
+                $r = hexdec(substr($hex,0,1).substr($hex,0,1));
+                $g = hexdec(substr($hex,1,1).substr($hex,1,1));
+                $b = hexdec(substr($hex,2,1).substr($hex,2,1));
+            }
+            else
+            {
+                $r = hexdec(substr($hex,0,2));
+                $g = hexdec(substr($hex,2,2));
+                $b = hexdec(substr($hex,4,2));
+            }
+
+            # Return method
+            $rgb = ["R" => $r, "G" => $g, "B" => $b];
+            if($return==='string')
+            {
+                $rgb = implode(",", $rgb);
+            }
+        }
+
+        return $rgb;
+    }
 }
